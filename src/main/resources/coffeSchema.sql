@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS brew_items(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    price DOUBLE,
+    PRIMARY KEY (id)
+)

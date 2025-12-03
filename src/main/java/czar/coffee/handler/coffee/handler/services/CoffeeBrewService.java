@@ -1,5 +1,6 @@
 package czar.coffee.handler.coffee.handler.services;
 
+import czar.coffee.handler.coffee.handler.dtos.CreateBrewItemRequest;
 import czar.coffee.handler.coffee.handler.entities.BrewItem;
 import czar.coffee.handler.coffee.handler.repositories.BrewItemsRepository;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,11 @@ public class CoffeeBrewService {
         return  repository.findById(id).orElseThrow(()-> new RuntimeException(("Brew Item Not found with Id" + id)));
     }
 
-    public BrewItem addBrewItem(BrewItem brewItem) {
-        return repository.save(brewItem);
+    public BrewItem addBrewItem(CreateBrewItemRequest brewItem) {
+
+        BrewItem newBrewItem = new BrewItem(brewItem.getName(),brewItem.getCost());
+
+        return repository.save(newBrewItem);
     }
 
 }

@@ -12,8 +12,7 @@ public class BrewItem {
     private  String name;
     private double cost;
 
-    public BrewItem(Long id, String name, double cost){
-        this.id = id;
+    public BrewItem( String name, double cost){
         this.name = name;
         this.cost =cost;
     }

@@ -1,7 +1,9 @@
 package czar.coffee.handler.coffee.handler.controllers;
 
+import czar.coffee.handler.coffee.handler.dtos.CreateBrewItemRequest;
 import czar.coffee.handler.coffee.handler.entities.BrewItem;
 import czar.coffee.handler.coffee.handler.services.CoffeeBrewService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +34,7 @@ public class CoffeeBrewController {
     }
 
     @PostMapping("/brew_drink")
-    public  BrewItem create(@RequestBody BrewItem brewItem){
+    public  BrewItem create(@Valid @RequestBody CreateBrewItemRequest brewItem){
         return  coffeeBrewService.addBrewItem(brewItem);
     }
 

@@ -1,6 +1,7 @@
 package czar.coffee.handler.coffee.handler.controllers;
 
 import czar.coffee.handler.coffee.handler.dtos.CreateBrewItemRequest;
+import czar.coffee.handler.coffee.handler.dtos.UpdateBrewItemRequest;
 import czar.coffee.handler.coffee.handler.entities.BrewItem;
 import czar.coffee.handler.coffee.handler.services.CoffeeBrewService;
 import jakarta.validation.Valid;
@@ -36,6 +37,16 @@ public class CoffeeBrewController {
     @PostMapping("/brew_drink")
     public  BrewItem create(@Valid @RequestBody CreateBrewItemRequest brewItem){
         return  coffeeBrewService.addBrewItem(brewItem);
+    }
+
+    @PatchMapping("/brew_drink/{id}")
+    public BrewItem updateBrewItem(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateBrewItemRequest request
+            ){
+
+        return  coffeeBrewService.updateBrewItem(id,request);
+
     }
 
 }

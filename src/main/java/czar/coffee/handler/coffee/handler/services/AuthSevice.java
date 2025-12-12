@@ -25,19 +25,20 @@ public class AuthSevice {
         this.jwtService = jwtService;
     }
 
-    public Map<String,String> SignUp (SignUpRequest request){
+    public Map<String,String> signUp (SignUpRequest request){
 
         if(usersRepository.existsByEmail(request.getEmail())){
             throw  new DuplicateUserException("The email has already been registered.");
         }
 
-        String formattedPassword =request.getPassword().trim();
+        String password = request.getPassword().trim();
+        String confirm = request.getConfirmPassword().trim();
 
-        if(!formattedPassword.equals(request.getConfirmPassword().trim())){
-            throw  new RuntimeException("The password confirmation provided is different from the original password");
+        if (!password.equals(confirm)) {
+            throw new RuntimeException("Passwords do not match");
         }
 
-        String hashedPassword = passwordEncoder.encode(formattedPassword);
+        String hashedPassword = passwordEncoder.encode(password);
 
         User newUser = new User(
                 request.getName(),

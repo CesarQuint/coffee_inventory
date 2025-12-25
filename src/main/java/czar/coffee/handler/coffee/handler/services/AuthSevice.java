@@ -4,6 +4,7 @@ package czar.coffee.handler.coffee.handler.services;
 import czar.coffee.handler.coffee.handler.controllers.exceptions.DuplicateUserException;
 import czar.coffee.handler.coffee.handler.dtos.LogInRequest;
 import czar.coffee.handler.coffee.handler.dtos.SignUpRequest;
+import czar.coffee.handler.coffee.handler.dtos.responses.AuthLogInResponse;
 import czar.coffee.handler.coffee.handler.entities.User;
 import czar.coffee.handler.coffee.handler.repositories.UsersRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,7 +55,7 @@ public class AuthSevice {
         return response;
     }
 
-    public String login(LogInRequest request) {
+    public AuthLogInResponse login(LogInRequest request) {
 
         User user = usersRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Invalid credentials"));
@@ -63,7 +64,12 @@ public class AuthSevice {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getEmail());
+
+        return new AuthLogInResponse(
+                token,
+                user.getEmail()
+        );
     }
 
 }

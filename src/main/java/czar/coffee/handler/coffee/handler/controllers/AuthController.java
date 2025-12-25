@@ -3,6 +3,7 @@ package czar.coffee.handler.coffee.handler.controllers;
 
 import czar.coffee.handler.coffee.handler.dtos.LogInRequest;
 import czar.coffee.handler.coffee.handler.dtos.SignUpRequest;
+import czar.coffee.handler.coffee.handler.dtos.responses.AuthLogInResponse;
 import czar.coffee.handler.coffee.handler.services.AuthSevice;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +30,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Map<String, String> login(@Valid @RequestBody LogInRequest request) {
-        String token = authSevice.login(request);
-        return Map.of("token", token);
+    public AuthLogInResponse login(@Valid @RequestBody LogInRequest request) {
+        AuthLogInResponse response = authSevice.login(request);
+        return response;
     }
 
 }

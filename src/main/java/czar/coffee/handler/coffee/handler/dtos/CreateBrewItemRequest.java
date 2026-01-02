@@ -11,6 +11,8 @@ public class CreateBrewItemRequest {
     @Positive(message = "Cost must be greater than 0")
     private double cost;
 
+    public  CreateBrewItemRequest (){}
+
     public String getName() {
         return name;
     }
